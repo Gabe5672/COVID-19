@@ -3,7 +3,7 @@ title: "index.Rmd"
 output: html_document
 ---
 
-```{r}
+```{r,message = FALSE, echo = FALSE, error = FALSE}
 library(tidyverse)
 library(kableExtra)
 library(ggplot2)
@@ -11,11 +11,11 @@ library(data.table)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE,message = FALSE, echo = FALSE, error = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r,message = FALSE, echo = FALSE, error = FALSE}
 load("~/GitHub/COVID-19/raw_data/us_state_confirmed_case.RData")
 mich_data <- filter(x,NAME %in% c("Michigan","Florida","New York"))
 mich_data_tall <- melt(as.data.table(mich_data),measure.vars = seq(13,208,by = 1),variable.name = "Date", value.name = "Cases") %>% arrange(desc(NAME))

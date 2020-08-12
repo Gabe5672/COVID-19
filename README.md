@@ -2,10 +2,6 @@
 ### BIOL390: Reproducible Research, Summer 2020
 **Copyright (2020) Vanessa Galici**
 
-```{r}
-date: format(Sys.time(), '%B %d, %Y')
-```
-
 ## Abstract (tl;dr)
 
 COVID-19 is a specific strain of coronavirus that was discovered in 2019. While there is still much data being processed, it is predicted that the outbreak first started in Wuhan, China in late December/early January. Making its way to the United States a few weeks later. Since then, there have been a total of over 5 million cases just in the United States alone and it has acquired the title of pandemic. The Covid-19 pandemic has sparked an unprecedented wave of research, data sharing and panic as the world seeks to understand the disease, track its spread and adjust to the new way of life.  
