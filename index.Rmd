@@ -3,23 +3,42 @@ title: "index.Rmd"
 output: html_document
 ---
 
-```{r,message = FALSE, echo = FALSE, error = FALSE}
+```{r setup, include=FALSE,message = FALSE, echo = FALSE, error = FALSE}
+## changing the chunck options to not echo and not give any massages they look bad
+knitr::opts_chunk$set(echo = FALSE,message = FALSE)
+```
+
+```{r}
+## initializing all of the packages we will need 
 library(tidyverse)
 library(kableExtra)
 library(ggplot2)
 library(data.table)
-knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r setup, include=FALSE,message = FALSE, echo = FALSE, error = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+```{r}
 
-```{r,message = FALSE, echo = FALSE, error = FALSE}
+## taking the data from the raw_data folder in the working directory 
+
 load("~/GitHub/COVID-19/raw_data/us_state_confirmed_case.RData")
-mich_data <- filter(x,NAME %in% c("Michigan","Florida","New York"))
+
+## filtering the data for just a few States
+
+mich_data <- filter(x,NAME %in% c("Michigan","Florida","New York","Texas"))
+
+## reordering the data to make a better looking graph
+
 mich_data_tall <- melt(as.data.table(mich_data),measure.vars = seq(13,208,by = 1),variable.name = "Date", value.name = "Cases") %>% arrange(desc(NAME))
+
+## ploting the first graph of just the cases
+
 ggplot(mich_data_tall,aes(x = Date,y = Cases,group = NAME,color = factor(NAME))) + geom_point() + geom_smooth()
+
+## creating the data set for the derivative of the cases
+
 mich_data_tall_dir <- mutate(mich_data_tall,Cases = lead(Cases) - Cases) %>% filter(Cases > -1000 & Cases  < 10000)
+
+## ploting the derivitive
+
 ggplot(mich_data_tall_dir,aes(x = Date,y = Cases,group = NAME,color = factor(NAME))) + geom_point() + geom_smooth()
 ```
